@@ -1,0 +1,53 @@
+﻿{
+  "name": "root",
+  "items": [
+    {
+      "name": "Início",
+      "title": "Início",
+      "href": "",
+      "icon": "Filled.Home"
+    },
+    {
+      "name": "Contador",
+      "href": "counter",
+      "icon": "Filled.Add",
+      "items": [
+        {
+          "name": "Contador 11"
+        },
+        {
+          "name": "Contador 22"
+        },
+        {
+          "name": "Contador 33",
+          "href": "fetchdata",
+          "items": [
+            {
+              "name": "Contador 331",
+              "icon": "Filled.Add"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tempo",
+      "href": "fetchdata",
+      "icon": "Filled.List",
+      "items": [
+        {
+          "name": "Data 1"
+        },
+        {
+          "name": "Data 2"
+        },
+        {
+          "name": "Data 3"
+        },
+        {
+          "name": "Data 4"
+        }
+      ]
+    }
+  ]
+}

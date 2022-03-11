@@ -1,0 +1,80 @@
+﻿@using CLTech.Core.Models
+@inherits LayoutComponentBase
+@inject HttpClient Http
+
+<MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" Theme="_themeManager.Theme"/>
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@if (_manifest == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true"></MudProgressCircular>
+}
+else
+{
+    <MudLayout>
+        <MudAppBar Elevation="_themeManager.AppBarElevation">
+            <MudToggleIconButton @bind-Toggled="@_isNavOpen" Edge="Edge.Start"
+                Icon="@Icons.Material.Filled.Menu" Title="Mostrar Menu" Color="Color.Inherit"
+                ToggledIcon="@Icons.Material.Filled.MenuOpen" ToggledTitle="Esconder Menu" ToggledColor="Color.Inherit" />
+            <MudSpacer />
+            <MudToggleIconButton @bind-Toggled="@_isDarkMode" 
+                Icon="@Icons.Material.Filled.DarkMode" Title="Modo Escuro" Color="Color.Inherit" 
+                ToggledIcon="@Icons.Material.Filled.LightMode" ToggledTitle="Modo Claro" ToggledColor="Color.Inherit" />
+            <MudIconButton
+                Icon="@Icons.Material.Filled.DarkMode" Title="Modo Escuro" Color="Color.Inherit" OnClick="@((e) => OpenThemeManager(true))" />
+        </MudAppBar>
+        <MudDrawer @bind-Open="_isNavOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation">
+            <MudDrawerHeader>
+                <MudText Typo="Typo.h6">@_manifest.Name</MudText>
+            </MudDrawerHeader>
+            <NavMenu />
+        </MudDrawer>
+        <MudMainContent>
+            @Body
+        </MudMainContent>
+        <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
+        <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
+
+    </MudLayout>
+}
+
+
+@code {
+    private ManifestModel? _manifest;
+    private bool _isNavOpen;
+    private bool _isDarkMode;
+    private MudTheme _theme = new();
+    private MudThemeProvider _mudThemeProvider;
+    private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
+    
+    public bool _themeManagerOpen = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _manifest = await Http.GetFromJsonAsync<ManifestModel>("manifest.json");
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isNavOpen = true;
+            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            StateHasChanged();
+        }
+    }
+
+    void OpenThemeManager(bool value)
+    {
+        _themeManagerOpen = value;
+    }
+
+    void UpdateTheme(ThemeManagerTheme value)
+    {
+        _themeManager = value;
+        StateHasChanged();
+    }
+
+}

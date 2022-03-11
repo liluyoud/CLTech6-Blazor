@@ -1,0 +1,62 @@
+﻿@using CLTech.Core.Models
+@using CLTech.Core.Extensions
+@using CLTech.Components.Extensions
+@inject HttpClient Http
+
+@if (_navigation == null || _current == null || _breadcrumbs == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true"></MudProgressCircular>
+}
+else
+{
+    <PageTitle>@_current?.Name</PageTitle>
+
+    if (ShowTitle) {
+        <MudToolBar>
+            @if (ShowIcon) {
+                <MudIcon Icon="@_current.Icon.ToMudBlazorIcon()" Size="Size.Large" Color="Color.Primary"></MudIcon>
+                <span>&nbsp;</span>
+            }
+            <MudText Typo="Typo.h4">
+                @_title
+            </MudText>
+            @if (ShowBreadcrumb) {
+                <MudSpacer />
+                <MudBreadcrumbs Items="_breadcrumbs"></MudBreadcrumbs>
+            }
+        </MudToolBar>
+        <MudDivider />
+    }
+}
+
+@code {
+    [Parameter]
+    public string? PageName { get; set; }
+
+    [Parameter]
+    public bool ShowTitle { get; set; } = true;
+
+    [Parameter]
+    public bool ShowIcon { get; set; } = true;
+
+    [Parameter]
+    public bool ShowBreadcrumb { get; set; } = true;
+
+    private NavigationModel? _navigation;
+    private NavigationModel? _current;
+    private List<NavigationModel>? _path;
+    private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>();
+    private string? _title;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(PageName))
+        {
+            _navigation = await Http.GetFromJsonAsync<NavigationModel>($"navigation.json?{Guid.NewGuid().ToString()}");
+            _current = _navigation.GetNavigationItem(PageName);
+            _path = _current.GetNavigationPath(_navigation);
+            _breadcrumbs.FillWithPath(_path);
+            _title = _current?.Title ?? _current?.Name;
+        }
+    }
+}

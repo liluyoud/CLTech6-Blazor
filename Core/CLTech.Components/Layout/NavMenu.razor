@@ -1,0 +1,30 @@
+﻿@using CLTech.Core.Models
+@using CLTech.Components.Extensions
+@using System.Text.Json
+
+@inject HttpClient Http
+
+@if (navigation == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true"></MudProgressCircular>
+}
+else
+{
+    <MudNavMenu>
+        @foreach (var item in navigation.Items)
+        {
+           <MudNavLink Href="@item.Href" Match="NavLinkMatch.All" Icon="@item.Icon.ToMudBlazorIcon()">@item.Name</MudNavLink>
+        }
+    </MudNavMenu>
+}
+@code {
+
+    private NavigationModel? navigation;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var randomid = Guid.NewGuid().ToString();
+        navigation = await Http.GetFromJsonAsync<NavigationModel>("navigation.json?" + randomid);
+    }
+
+}
