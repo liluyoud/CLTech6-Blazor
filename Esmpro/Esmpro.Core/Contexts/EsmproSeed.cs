@@ -9,14 +9,14 @@ namespace Esmpro.Core.Contexts
 {
     public class EsmproSeed
     {
-        public static List<EventType> GetEventTypes()
-        {
-            var list = new List<EventType>();
-            list.Add(new EventType("Curso"));
-            list.Add(new EventType("Palestra"));
-            list.Add(new EventType("Treinamento"));
-            list.Add(new EventType("Workshop"));
-            return list;
-        }
+        //public static List<EventType> GetEventTypes()
+        //{
+        //    var list = new List<EventType>();
+        //    list.Add(new EventType("Curso"));
+        //    list.Add(new EventType("Palestra"));
+        //    list.Add(new EventType("Treinamento"));
+        //    list.Add(new EventType("Workshop"));
+        //    return list;
+        //}
     }
 }

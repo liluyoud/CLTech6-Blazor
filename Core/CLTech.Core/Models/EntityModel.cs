@@ -8,6 +8,6 @@ namespace CLTech.Core.Models
 {
     public class EntityModel
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
