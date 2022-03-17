@@ -11,4 +11,12 @@ public static class OrmLiteExtensions
         audit.CreatedDate = DateTime.UtcNow;
         audit.ModifiedDate = DateTime.UtcNow;
     }
+
+    public static void FillAuditWithDefault(this IEnumerable<AuditBase> audits)
+    {
+        foreach (var audit in audits)
+        {
+            audit.FillAuditWithDefault();
+        }
+    }
 }

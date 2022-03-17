@@ -4,8 +4,8 @@ using ServiceStack.DataAnnotations;
 
 namespace Esmpro.Core.Entities;
 
-[Alias("Conferences")]
-public class Conference : AuditModel
+[Alias("Tracks")]
+public class Track : AuditModel
 {
     [Required]
     [StringLength(255)]
@@ -18,21 +18,11 @@ public class Conference : AuditModel
 
     public DateTimeOffset? EndAt { get; set; }
 
-    public double? Workload { get; set; }
-
-    public bool? IsIndoor { get; set; }
-
-    public bool? IsInPerson { get; set; }
-
-    public bool? IsRemote { get; set; }
-
-    public bool? IsRecorded { get; set; }
-
-    public bool? IsOffline { get; set; }
-
+    public long? ConferenceId { get; set; }
     [Reference]
-    public List<Track>? Tracks { get; set; }
+    public Conference? Conference { get; set; }
 
     [Reference]
     public List<Session>? Sessions { get; set; }
+
 }

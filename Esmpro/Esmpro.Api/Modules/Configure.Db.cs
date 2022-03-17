@@ -1,5 +1,3 @@
-using CLTech.Core.Extensions;
-using Esmpro.Core.Entities;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 
@@ -12,22 +10,9 @@ namespace Esmpro.Api
         public void Configure(IWebHostBuilder builder) => builder
             .ConfigureServices((context, services) => {
                 services.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(
-                    context.Configuration.GetConnectionString("EsmproConnection")
-                    ?? "Server=localhost;Database=test;User Id=test;Password=test;MultipleActiveResultSets=True;",
+                    context.Configuration.GetConnectionString("EsmproConnection"),
                     SqlServer2019Dialect.Provider));
-            })
-           .ConfigureAppHost(appHost => {
-                using var db = appHost.Resolve<IDbConnectionFactory>().Open();
-                if (db.CreateTableIfNotExists<Conference>())
-                {
-                   var conference = new Conference
-                   {
-                       Name = "Teste de Evento",
-                   };
-                   conference.FillAuditWithDefault();
-                   db.Insert(conference);
-                }
-           });
-        
+            });
+
     }
 }

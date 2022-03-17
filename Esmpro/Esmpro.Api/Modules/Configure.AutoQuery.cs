@@ -10,7 +10,7 @@ namespace Esmpro.Api
             .ConfigureAppHost(appHost => {
                 appHost.Plugins.Add(new AutoQueryFeature {
                     MaxLimit = 1000,
-                    //IncludeTotal = true,
+                    IncludeTotal = true
                 });
             });
     }

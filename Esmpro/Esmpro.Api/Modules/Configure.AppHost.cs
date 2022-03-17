@@ -1,3 +1,4 @@
+using Esmpro.Core.Commands;
 using Esmpro.Services;
 using Funq;
 
@@ -12,7 +13,7 @@ public class AppHost : AppHostBase, IHostingStartup
             // Configure ASP.NET Core IOC Dependencies
         });
 
-    public AppHost() : base("Esmpro.Api", typeof(EsmproServices).Assembly) {}
+    public AppHost() : base("Esmpro.Api", typeof(EsmproServices).Assembly, typeof(Hello).Assembly) {}
 
     public override void Configure(Container container)
     {
