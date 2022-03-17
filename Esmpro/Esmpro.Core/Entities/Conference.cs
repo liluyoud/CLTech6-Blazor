@@ -1,32 +1,39 @@
 ﻿using CLTech.Core.Models;
-using System.ComponentModel.DataAnnotations;
+using ServiceStack.DataAnnotations;
 
-namespace Esmpro.Core.Entities
+namespace Esmpro.Core.Entities;
+
+public class Conference : AuditModel
 {
-    public class Conference : EntityModel
-    {
-        [MaxLength(255)]
-        [Required]
-        public string? Name { get; set; }
+    [Required]
+    [StringLength(255)]
+    public string? Name { get; set; }
 
-        public string? Description { get; set; }
+    public string? Description { get; set; }
 
-        public DateTimeOffset? Start { get; set; }
+    public DateTimeOffset? Start { get; set; }
 
-        public DateTimeOffset? End { get; set; }
+    public DateTimeOffset? End { get; set; }
 
-        public double Workload { get; set; }
+    public double Workload { get; set; }
 
-        public bool IsIndoor { get; set; }
+    public bool IsIndoor { get; set; }
 
-        public bool IsInPerson { get; set; }
+    public bool IsInPerson { get; set; }
 
-        public bool IsRemote { get; set; }
+    public bool IsRemote { get; set; }
 
-        public bool IsRecorded { get; set; }
+    public bool IsRecorded { get; set; }
 
-        public bool IsOffline { get; set; }
+    public bool IsOffline { get; set; }
 
-        public override string ToString() => $"{Name}: {Workload}h";
-    }
+    [Reference]
+    public ICollection<Track> Tracks { get; set; } = default!;
+
+    [Reference]
+    public ICollection<Session> Sessions { get; set; } = default!;
+
+    public ICollection<ConferenceAttendee> ConferenceAttendees { get; set; } = default!;
+
+    public ICollection<ConferenceSpeaker> ConferenceSpeakers { get; set; } = default!;
 }

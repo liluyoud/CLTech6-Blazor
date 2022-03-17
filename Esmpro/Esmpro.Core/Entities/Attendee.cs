@@ -1,27 +1,33 @@
 ﻿using CLTech.Core.Models;
-using System.ComponentModel.DataAnnotations;
+using ServiceStack.DataAnnotations;
 
 namespace Esmpro.Core.Entities
 {
     public class Attendee : EntityModel
     {
         [Required]
-        [MaxLength(255)]
+        [StringLength(255)]
         public string? Name { get; set; }
 
+        [Index(Unique = true)]
         [Required]
-        [MaxLength(100)]
+        [StringLength(100)]
         public string? Identity { get; set; }
 
-        [MaxLength(100)]
+        [Index(Unique = true)]
+        [StringLength(100)]
         public string? Email { get; set; }
 
-        [MaxLength(100)]
+        [StringLength(100)]
         public string? Phone { get; set; }
 
-        [MaxLength(255)]
+        [StringLength(255)]
         public string? EmailAddress { get; set; }
 
-        public ICollection<SessionAttendee> SessionsAttendees { get; set; } = new List<SessionAttendee>();
+        [Reference]
+        public ICollection<ConferenceAttendee> ConferencesAttendees { get; set; } = default!;
+
+        [Reference]
+        public ICollection<SessionAttendee> SessionsAttendees { get; set; } = default!;
     }
 }

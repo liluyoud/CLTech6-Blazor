@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ServiceStack.DataAnnotations;
 
-namespace CLTech.Core.Models
+namespace CLTech.Core.Models;
+
+public class EntityModel : IEntityModel
 {
-    public class EntityModel
-    {
-        public Guid Id { get; set; }
-    }
+    [AutoIncrement]
+    public long Id { get; set; }
+}
+
+public interface IEntityModel
+{
+    long Id { get; set; }
 }

@@ -1,33 +1,35 @@
 ﻿using CLTech.Core.Models;
-using System.ComponentModel.DataAnnotations;
+using ServiceStack.DataAnnotations;
 
-namespace Esmpro.Core.Entities
+namespace Esmpro.Core.Entities;
+
+public class Session : AuditModel
 {
-    public class Session : EntityModel
-    {
-        [Required]
-        [MaxLength(255)]
-        public string? Title { get; set; }
+    [Required]
+    [StringLength(255)]
+    public string? Title { get; set; }
 
-        [MaxLength(4000)]
-        public string? Abstract { get; set; }
+    [StringLength(4000)]
+    public string? Abstract { get; set; }
 
-        public DateTimeOffset? StartTime { get; set; }
+    public DateTimeOffset? StartTime { get; set; }
 
-        public DateTimeOffset? EndTime { get; set; }
+    public DateTimeOffset? EndTime { get; set; }
 
-        public TimeSpan Duration =>
-            EndTime?.Subtract(StartTime ?? EndTime ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
+    public TimeSpan Duration =>
+        EndTime?.Subtract(StartTime ?? EndTime ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
 
-        public int? TrackId { get; set; }
-        public Track? Track { get; set; }
+    public long? TrackId { get; set; }
+    public Track? Track { get; set; }
 
-        public ICollection<SessionSpeaker> SessionSpeakers { get; set; } =
-            new List<SessionSpeaker>();
+    public long? ConferenceId { get; set; }
+    public Conference? Conference { get; set; }
 
-        public ICollection<SessionAttendee> SessionAttendees { get; set; } =
-            new List<SessionAttendee>();
+    [Reference]
+    public ICollection<SessionSpeaker> SessionSpeakers { get; set; } = default!;
+
+    [Reference]
+    public ICollection<SessionAttendee> SessionAttendees { get; set; } = default!;
 
 
-    }
 }

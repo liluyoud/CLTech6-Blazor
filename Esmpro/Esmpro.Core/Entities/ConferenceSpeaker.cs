@@ -2,11 +2,11 @@
 
 namespace Esmpro.Core.Entities;
 
-public class SessionSpeaker : EntityModel
+public class ConferenceSpeaker : EntityModel
 {
-    public long SessionId { get; set; }
+    public long ConferenceId { get; set; }
 
-    public Session? Session { get; set; }
+    public Conference? Conference { get; set; }
 
     public long SpeakerId { get; set; }
 

@@ -25,30 +25,7 @@ namespace Esmpro.Core.Contexts
                .Entity<Attendee>()
                .HasIndex(a => a.Identity)
                .IsUnique();
-
-            // Many-to-many: Session <-> Attendee
-            builder
-                .Entity<SessionAttendee>()
-                .HasKey(sa => new { sa.SessionId, sa.AttendeeId });
-
-            // Many-to-many: Speaker <-> Session
-            builder
-                .Entity<SessionSpeaker>()
-                .HasKey(ss => new { ss.SessionId, ss.SpeakerId });
         }
-
-        //public static async Task CheckAndSeedDatabaseAsync(EsmproContext context)
-        //{
-        //    //if (await context.Database.EnsureCreatedAsync())
-        //    //{
-        //    //    var eventTypes = EsmproSeed.GetEventTypes();
-        //    //    if (context.EventTypes != null)
-        //    //    {
-        //    //        context.EventTypes.AddRange(eventTypes);
-        //    //        await context.SaveChangesAsync();
-        //    //    }
-        //    //}
-        //}
 
     }
 }

@@ -1,14 +1,16 @@
 ﻿using CLTech.Core.Models;
-using System.ComponentModel.DataAnnotations;
+using ServiceStack.DataAnnotations;
 
-namespace Esmpro.Core.Entities
+namespace Esmpro.Core.Entities;
+
+public class Track : AuditModel
 {
-    public class Track : EntityModel
-    {
-        [Required]
-        [MaxLength(255)]
-        public string? Name { get; set; }
+    [Required]
+    [StringLength(255)]
+    public string? Name { get; set; }
 
-        public ICollection<Session> Sessions { get; set; } = new List<Session>();
-    }
+    public long? ConferenceId { get; set; }
+    public Conference? Conference { get; set; }
+
+    public ICollection<Session> Sessions { get; set; } = default!;
 }
