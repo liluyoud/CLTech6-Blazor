@@ -15,6 +15,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\CLTech.Components\CLTech.Components.csproj" />
 	  <ProjectReference Include="..\..\Core\CLTech.Core\CLTech.Core.csproj" />
+	  <ProjectReference Include="..\Esmpro.Core\Esmpro.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -6,10 +6,10 @@ namespace Esmpro.Core.Contexts
     public class EsmproContext : DbContext
     {
         public DbSet<Conference> Conferences { get; set; } = default!;
-        public DbSet<Session> Sessions { get; set; } = default!;
-        public DbSet<Track> Tracks { get; set; } = default!;
-        public DbSet<Speaker> Speakers { get; set; } = default!;
-        public DbSet<Attendee> Attendees { get; set; } = default!;
+        //public DbSet<Session> Sessions { get; set; } = default!;
+        //public DbSet<Track> Tracks { get; set; } = default!;
+        //public DbSet<Speaker> Speakers { get; set; } = default!;
+        //public DbSet<Attendee> Attendees { get; set; } = default!;
 
 
         public EsmproContext(DbContextOptions<EsmproContext> options) : base(options)
@@ -21,10 +21,10 @@ namespace Esmpro.Core.Contexts
         {
             builder.HasDefaultSchema("esmpro");
 
-            builder
-               .Entity<Attendee>()
-               .HasIndex(a => a.Identity)
-               .IsUnique();
+            //builder
+            //   .Entity<Attendee>()
+            //   .HasIndex(a => a.Identity)
+            //   .IsUnique();
         }
 
     }

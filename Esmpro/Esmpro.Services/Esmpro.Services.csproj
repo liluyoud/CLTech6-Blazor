@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack.Interfaces" Version="6.0.2" />
+    <PackageReference Include="ServiceStack" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Esmpro.Core\Esmpro.Core.csproj" />
   </ItemGroup>
 
 </Project>

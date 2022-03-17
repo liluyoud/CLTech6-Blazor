@@ -1,4 +1,5 @@
-﻿using ServiceStack.DataAnnotations;
+﻿using CLTech.Core.Interfaces;
+using ServiceStack.DataAnnotations;
 
 namespace CLTech.Core.Models;
 
@@ -8,7 +9,3 @@ public class EntityModel : IEntityModel
     public long Id { get; set; }
 }
 
-public interface IEntityModel
-{
-    long Id { get; set; }
-}

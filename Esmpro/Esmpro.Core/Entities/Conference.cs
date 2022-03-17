@@ -3,12 +3,14 @@ using ServiceStack.DataAnnotations;
 
 namespace Esmpro.Core.Entities;
 
+[Alias("Conferences")]
 public class Conference : AuditModel
 {
     [Required]
     [StringLength(255)]
     public string? Name { get; set; }
 
+    [StringLength(4000)]
     public string? Description { get; set; }
 
     public DateTimeOffset? Start { get; set; }
@@ -26,14 +28,4 @@ public class Conference : AuditModel
     public bool IsRecorded { get; set; }
 
     public bool IsOffline { get; set; }
-
-    [Reference]
-    public ICollection<Track> Tracks { get; set; } = default!;
-
-    [Reference]
-    public ICollection<Session> Sessions { get; set; } = default!;
-
-    public ICollection<ConferenceAttendee> ConferenceAttendees { get; set; } = default!;
-
-    public ICollection<ConferenceSpeaker> ConferenceSpeakers { get; set; } = default!;
 }
