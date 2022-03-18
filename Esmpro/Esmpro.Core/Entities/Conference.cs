@@ -38,4 +38,7 @@ public class Conference : AuditModel
 
     [Reference]
     public List<Register>? Registereds { get; set; }
+
+    [Reference]
+    public List<SpeakerConference>? SpeakersConferences { get; set; }
 }

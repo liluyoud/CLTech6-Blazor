@@ -22,7 +22,11 @@ public class Track : AuditModel
     [Reference]
     public Conference? Conference { get; set; }
 
+    public long? SessionId { get; set; }
     [Reference]
     public List<Session>? Sessions { get; set; }
+
+    [Reference]
+    public List<SpeakerTrack>? SpeakersTracks { get; set; }
 
 }

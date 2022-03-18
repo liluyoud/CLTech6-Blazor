@@ -27,4 +27,13 @@ public class Speaker : AuditModel
 
     [StringLength(4000)]
     public string? Bio { get; set; }
+
+    [Reference]
+    public List<SpeakerConference>? SpeakersConferences { get; set; }
+    
+    [Reference]
+    public List<SpeakerSession>? SpeakersSessions { get; set; }
+
+    [Reference]
+    public List<SpeakerTrack>? SpeakersTracks { get; set; }
 }

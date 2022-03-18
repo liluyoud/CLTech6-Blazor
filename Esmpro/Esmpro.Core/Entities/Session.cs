@@ -29,8 +29,8 @@ public class Session : AuditModel
     [Reference]
     public Conference? Conference { get; set; }
 
-    //[Reference]
-    //public ICollection<SessionSpeaker> SessionSpeakers { get; set; } = default!;
+    [Reference]
+    public List<SpeakerSession>? SpeakersSessions { get; set; }
 
     //[Reference]
     //public ICollection<SessionAttendee> SessionAttendees { get; set; } = default!;
