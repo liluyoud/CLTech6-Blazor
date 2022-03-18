@@ -1,4 +1,5 @@
-﻿using CLTech.Core.Models;
+﻿using CLTech.Core.Extensions;
+using CLTech.Core.Models;
 using ServiceStack.DataAnnotations;
 
 namespace Esmpro.Core.Entities;
@@ -17,9 +18,8 @@ public class Session : AuditModel
 
     public DateTimeOffset? EndAt { get; set; }
 
-    [Computed]
-    public TimeSpan Duration =>
-        EndAt?.Subtract(StartAt ?? EndAt ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
+    [Ignore]
+    public TimeSpan Duration => StartAt.GetDurationUntil(EndAt);
 
     public long? TrackId { get; set; }
     [Reference]

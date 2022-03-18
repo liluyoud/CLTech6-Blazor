@@ -8,7 +8,7 @@ namespace CLTech.Core.Extensions
 {
     public static class TimeExtensions
     {
-        public static TimeSpan GetDuration(this DateTimeOffset? start, DateTimeOffset? end)
+        public static TimeSpan GetDurationUntil(this DateTimeOffset? start, DateTimeOffset? end)
         {
             return end?.Subtract(start ?? end ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
         }
